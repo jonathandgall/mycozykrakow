@@ -42,5 +42,8 @@
         "single"
       ]
     }
+  },
+  "dependencies": {
+    "ngrok": "^2.2.11"
   }
 }
