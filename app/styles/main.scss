@@ -9,12 +9,33 @@
 }
 
 
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff !important;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #fff !important;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff !important;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff !important;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #fff !important;
+}
+
+
+
+
 /* Map */
 
 #map {
-    min-height: 500px;
+    min-height: 300px;
     width: 100%;
-    height: 100%
 }
 
 
@@ -29,6 +50,8 @@ body {
 }
 
 
+
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 
 .header,
@@ -38,17 +61,54 @@ body {
     padding-left: 1rem;
 }
 
+.col-sm-4 {
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+
 
 /* Custom page header */
 
 .header {
     padding-bottom: 1rem;
-    border-bottom: .05rem solid #e5e5e5;
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+
+h4,
+h2,
+h3,
+h5,
+h6 {
     font-family: 'Neuton', serif;
 }
 
-h4 {
-    font-family: 'Neuton', serif;
+.form-control {
+  font-size: 2.25rem;
+  font-family: 'Neuton', serif;
+    background-color: #FF726F;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+}
+
+
+.form-control:focus {
+  background-color: #FF726F;
+}
+
+input,
+textarea {
+    background-color: #FF726F;
+    color: #FFF;
+}
+
+
+.center_div {
+    margin: 0 auto;
+    width: 80%/* value of your choice which suits your alignment */
 }
 
 
