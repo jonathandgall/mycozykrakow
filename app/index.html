@@ -59,7 +59,7 @@
         sushiRenders = [];
 
         for (var i = sushiMarkers.length - 1; i >= 0; i--) {
-            
+
             sushiRenders[i] = new google.maps.Marker({
                 map: map,
                 position: {
@@ -145,21 +145,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row marketing">
-                <div class="col-lg-3">
-                    <h4>Resto Sympa</h4>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Hello Vegan</h4>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Pets Happy</h4>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Brocolhungry</h4>
-                </div>
-                <div class="row">
-                    Other Restaurants
+            <div  class="row marketing ">
+                <div data-bind="foreach: restaurantViewModel" class="col-lg-3">
+                    <h4> <span data-bind="text: name"></span></h4>
                 </div>
             </div>
         </section>
