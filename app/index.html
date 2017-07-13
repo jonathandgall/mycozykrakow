@@ -145,15 +145,23 @@
                     </div>
                 </div>
             </div>
-            <div  class="row marketing ">
-                <div data-bind="foreach: restaurantViewModel" class="col-lg-3">
-                    <h4> <span data-bind="text: name"></span></h4>
-                </div>
+            <div class="filter area">
+                <!--             <form data-bind="submit: doFilter">
+                <input type="text" id="restoFilter" value="" data-bind="value: restoFilter">
+                <button type="submit">Submit</button>
+            </form> -->
             </div>
-        </section>
-        <div class="footer">
-            <p>♥ from Poland</p>
-        </div>
+            <div class="row marketing ">
+                <ul data-bind="template: {name:'restaurant',foreach: currentRestaurant}" class="col-lg-3"></ul>
+                <script type="text/html" id="restaurant">
+                    <li> <span data-bind="text: name"></span></li>
+                </script>
+            </div>
+    </div>
+    </section>
+    <div class="footer">
+        <p>♥ from Poland</p>
+    </div>
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
