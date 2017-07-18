@@ -20,60 +20,7 @@
   <!-- build:js scripts/vendor/modernizr.js -->
   <script src="/bower_components/modernizr/modernizr.js"></script>
   <!-- endbuild -->
-  <script type="text/javascript">
-  var map;
 
-  function initMap() {
-    // Constructor creates a new map - only center and zoom are required.
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: 50.06193,
-        lng: 19.94
-      },
-      zoom: 15
-
-    });
-
-    sushiMarkers = [{
-      name: '77 Sushi',
-      lat: 50.0581635,
-      lng: 19.9389086
-    }, {
-      name: 'Youmiko Sushi',
-      lat: 50.0504222,
-      lng: 19.943054
-    }, {
-      name: 'Zen Sushi',
-      lat: 50.0621398,
-      lng: 19.9417126
-    }, {
-      name: 'Urara',
-      lat: 50.0643265802915,
-      lng: 19.9408391802915
-    }, {
-      name: 'Youmiko Sushi',
-      lat: 50.0569154,
-      lng: 19.9324689
-    }, ]
-
-    sushiRenders = [];
-
-    for (var i = sushiMarkers.length - 1; i >= 0; i--) {
-
-      sushiRenders[i] = new google.maps.Marker({
-        map: map,
-        position: {
-          lat: sushiMarkers[i].lat,
-          lng: sushiMarkers[i].lng
-        },
-        title: sushiMarkers[i].lng.name
-      });
-
-    }
-
-  }
-
-  </script>
 </head>
 
 <body>
