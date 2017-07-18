@@ -26,7 +26,6 @@ var restaurantModel = {
 
 var sushiRenders = [];
 
-
 var map;
 
 function initMap() {
@@ -39,7 +38,6 @@ function initMap() {
     zoom: 13
   });
 
-
   for (var i = 0; i < restaurantModel.currentArray.length ; i++) {
 
     sushiRenders[i] = new google.maps.Marker({
@@ -51,7 +49,6 @@ function initMap() {
       title: restaurantModel.currentArray[i].name
     });
   }
-  // console.log(sushiRenders)
 }
 
 
@@ -64,10 +61,11 @@ var viewModel = {
   search: function(arg) {
     //removing current restaurants at the beginning of the loop
     viewModel.restaurants.removeAll();
-    //check if value of arg exist in our model
+    //check if value of arg exist in our model and adding/removing the marker depending on this existence
     for (var i = 0; i < restaurantModel.currentArray.length; i++) {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
-        viewModel.restaurants.push(restaurantModel.currentArray[i])
+        viewModel.restaurants.push(restaurantModel.currentArray[i]);
+          sushiRenders[i].setMap(map)
       } else {
         sushiRenders[i].setMap(null)
       }
