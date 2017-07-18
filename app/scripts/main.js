@@ -20,30 +20,33 @@ var restaurantModel = {
     lat: 50.0569154,
     lng: 19.9324689
   }],
-  // filteredArray: [{ name: 'Youmiko Sushi' }]
 
+  //
 }
 
 
 var viewModel = {
-  restaurants: ko.observableArray([]),
-  query: ko.observable(''),
+    //exporting a copy of the current array so that it is shown as a list on my landing page
+    restaurants: ko.observableArray(restaurantModel.currentArray.slice(0, restaurantModel.currentArray.length)),
 
-  search: function(arg) {
-    //removing current restaurants at the beginning of the loop
-    viewModel.restaurants.removeAll();
-    //check if value of arg exist in our model
-    for (var i = 0; i < restaurantModel.currentArray.length; i++) {
-      if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
-        viewModel.restaurants.push(restaurantModel.currentArray[i])
+      query: ko.observable(''),
+
+      search: function(arg) {
+        //removing current restaurants at the beginning of the loop
+        viewModel.restaurants.removeAll();
+        //check if value of arg exist in our model
+        for (var i = 0; i < restaurantModel.currentArray.length; i++) {
+          if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
+            viewModel.restaurants.push(restaurantModel.currentArray[i])
+          }
+        }
+        console.log(arg)
       }
-    }
-  console.log(arg)}
-};
+    };
 
 
 
-viewModel.query.subscribe(viewModel.search);
+    viewModel.query.subscribe(viewModel.search);
 
 
-ko.applyBindings(viewModel);
+    ko.applyBindings(viewModel);
