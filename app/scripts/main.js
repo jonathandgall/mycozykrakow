@@ -1,3 +1,4 @@
+//model for restaurants in krakow
 var restaurantModel = {
   currentArray: [{
     name: '77 Sushi',
@@ -20,16 +21,13 @@ var restaurantModel = {
     lat: 50.0521837,
     lng: 19.9429686
   }],
-
-  //
 }
 
-var sushiRenders = [];
-
+//implementing google maps
 var map;
 
 function initMap() {
-  // Constructor creates a new map - only center and zoom are required.
+  //creating a new map with the google maps constructor, defining it with it's center and zoom attribute
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 50.06193,
@@ -38,9 +36,9 @@ function initMap() {
     zoom: 13
   });
 
+  //implemeting a loop in order to retrieve the markers from the model and show them in the view
   for (var i = 0; i < restaurantModel.currentArray.length ; i++) {
-
-    sushiRenders[i] = new google.maps.Marker({
+    restaurantModel.currentArray[i].marker = new google.maps.Marker({
       map: map,
       position: {
         lat: restaurantModel.currentArray[i].lat,
@@ -61,23 +59,21 @@ var viewModel = {
   search: function(arg) {
     //removing current restaurants at the beginning of the loop
     viewModel.restaurants.removeAll();
-    //check if value of arg exist in our model and adding/removing the marker depending on this existence
+    //check if value of arg exist in our model and adding/removing the marker depending on its existence
     for (var i = 0; i < restaurantModel.currentArray.length; i++) {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
         viewModel.restaurants.push(restaurantModel.currentArray[i]);
-          sushiRenders[i].setMap(map)
+        //putting back the marker when there is a match
+          restaurantModel.currentArray[i].marker.setMap(map)
       } else {
-        sushiRenders[i].setMap(null)
+        //removing the marker when there is no match
+        restaurantModel.currentArray[i].marker.setMap(null)
       }
-
     }
-    console.log(arg)
   }
 };
 
-
-
+//create event notification mechanism. when the query changes, the search is invoked.
 viewModel.query.subscribe(viewModel.search);
-
 
 ko.applyBindings(viewModel);
