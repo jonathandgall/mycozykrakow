@@ -20,7 +20,6 @@
   <!-- build:js scripts/vendor/modernizr.js -->
   <script src="/bower_components/modernizr/modernizr.js"></script>
   <!-- endbuild -->
-
 </head>
 
 <body>
@@ -59,19 +58,26 @@
         <div class="row">
           <h2 style="margin-bottom: 40px  ">Our Favourite Places</h2></div>
       </div>
-
       <div class="filter area">
       </div>
       <div class="row marketing ">
-            <!-- Dynamic search box which update at each character-->
-      <input type="search" placeholder="Search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
-      <!-- Implementing template to render data from the viewodel in a list -->
-        <ul data-bind="template: {name:'restaurant', foreach:restaurants}"></ul>
-        <script type="text/html" id="restaurant">
-          <li>
-            <strong data-bind="text: name"></strong>
-          </li>
-        </script>
+        <div class="row">
+          <!-- Dynamic search box which update at each character-->
+          <input type="search" placeholder="Search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+        </div>
+        <div class="row" col-lg-12>
+          <!-- Implementing template to render data from the viewmodel in a list -->
+          <!-- Binding additionaly the bounce element -->
+
+          <ul data-bind="foreach:restaurants">
+                         <li data-bind="click: $parent.bounceMarker">
+              <strong data-bind="text: name"></strong>
+            </li> 
+          </ul>
+          <!-- <script type="text/html" id="restaurant"> -->
+
+          <!-- </script> -->
+        </div>
       </div>
   </div>
   </section>

@@ -37,7 +37,7 @@ function initMap() {
   });
 
   //implemeting a loop in order to retrieve the markers from the model and show them in the view
-  for (var i = 0; i < restaurantModel.currentArray.length ; i++) {
+  for (var i = 0; i < restaurantModel.currentArray.length; i++) {
     restaurantModel.currentArray[i].marker = new google.maps.Marker({
       map: map,
       position: {
@@ -64,12 +64,21 @@ var viewModel = {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
         viewModel.restaurants.push(restaurantModel.currentArray[i]);
         //putting back the marker when there is a match
-          restaurantModel.currentArray[i].marker.setMap(map)
+        restaurantModel.currentArray[i].marker.setMap(map)
       } else {
         //removing the marker when there is no match
         restaurantModel.currentArray[i].marker.setMap(null)
       }
     }
+  },
+  bounceMarker: function(arg) {
+      var infowindow = new google.maps.InfoWindow({
+        content: 'contentString'
+      });
+
+      infowindow.open(map, arg.marker);
+
+    console.log(arg.marker)
   }
 };
 
