@@ -38,10 +38,11 @@ function initMap() {
       lat: 50.06193,
       lng: 19.94
     },
-    zoom: 13
+    zoom: 13,
+
   });
 
-  //implemeting a loop in order to retrieve the markers from the model and show them in the view
+  //implementing a loop in order to retrieve the markers from the model and show them in the view
   for (var i = 0; i < restaurantModel.currentArray.length; i++) {
     restaurantModel.currentArray[i].marker = new google.maps.Marker({
       map: map,
@@ -49,9 +50,27 @@ function initMap() {
         lat: restaurantModel.currentArray[i].lat,
         lng: restaurantModel.currentArray[i].lng
       },
-      title: restaurantModel.currentArray[i].name
+      title: restaurantModel.currentArray[i].name,
     });
-  }
+    isolateMarker(restaurantModel.currentArray[i].marker);
+
+
+    //putting marker event listener to trigger bounce
+    function isolateMarker(marker) {
+      marker.addListener('click', function() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function() {
+            marker.setAnimation(null)
+          }, 2000);
+
+        }
+      })
+    };
+
+  };
 }
 
 
@@ -78,15 +97,17 @@ var viewModel = {
   },
 
 
+
+
   bounceMarker: function(arg) {
     var infowindow = new google.maps.InfoWindow({
       content: arg.contentString
     });
 
     infowindow.open(map, arg.marker);
-
-    // console.log(arg.marker)
   }
+
+
 };
 
 //create event notification mechanism. when the query changes, the search is invoked.
