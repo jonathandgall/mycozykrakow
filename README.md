@@ -1,11 +1,11 @@
-<p align="center">My Cozy Krakow</p>
+<p align="center"><h3>My Cozy Krakow</h3></p>
 
 My Cozy Krakow is my Udacity Frontend Nanodegree graduation project. Creating a full responsive web application from scratch, using the Google Maps and the Foursquare API.
 
 ## Quick Start
 
 1. Download or clone this repository `git clone https://github.com/odajay/mycozykrakow.git`
-2. In terminal, cd under directory and type 'gulp serve'
+2. In terminal, cd under the directory where the application is located and type 'gulp serve'
 3. Launch your browser to the url localhost:9000
 
 ## Important files for code examination
@@ -34,4 +34,4 @@ http://odajay.com/mycozykrakow/dist/
 
 ## Copyright and license
 
-Code released under the [MIT License]
+Code released under the MIT License

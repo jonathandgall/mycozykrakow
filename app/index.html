@@ -30,7 +30,7 @@
     <div class="header">
       <div class="row">
         <div class="col" style="color: #fff; vertical-align: baseline;">
-          <i class="fa fa-bars" aria-hidden="true"></i></div>
+          <h4>Jonathan Gall x Udacity</h4></div>
         <div class="col" style="text-align: center; letter-spacing: -0.88px;">
           <h4>My Cozy Krakow</h4></div>
         <div class="col" style="text-align: right; vertical-align: top;
@@ -45,44 +45,33 @@
       <form>
         <div class="form-group row">
           <div class="col">
-            <input type="text" class="form-control" id="inputQuery" style="color: #fff; margin-bottom: 40px;" placeholder="Where to go?">
+            <!-- Dynamic search box which update at each character-->
+            <input type="search" class="form-control" id="inputQuery" style="color: #fff; margin-bottom: 0px;" placeholder="Where to go?" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
           </div>
         </div>
       </form>
+      <div class="row marketing ">
+        <div class="row" col-lg-12>
+          <!-- Implementing template to render data from the viewmodel in a list -->
+          <!-- Binding additionaly the bounce element -->
+          <ul data-bind="foreach:restaurants">
+            <li data-bind="click: $parent.showInfoWindow">
+              <strong data-bind="text: name"></strong>
+            </li>
+          </ul>
+          <!-- <script type="text/html" id="restaurant"> -->
+          <!-- </script> -->
+        </div>
+      </div>
     </div>
     <div class="row">
       <div id="map"></div>
     </div>
     <section class="selected-restaurant" style="margin-top: 40px">
-      <div class="center_div">
-        <div class="row">
-          <h2 style="margin-bottom: 40px  ">Our Favourite Places</h2></div>
-      </div>
-      <div class="filter area">
-      </div>
-      <div class="row marketing ">
-        <div class="row">
-          <!-- Dynamic search box which update at each character-->
-          <input type="search" placeholder="Search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
-        </div>
-        <div class="row" col-lg-12>
-          <!-- Implementing template to render data from the viewmodel in a list -->
-          <!-- Binding additionaly the bounce element -->
-
-          <ul data-bind="foreach:restaurants">
-                         <li data-bind="click: $parent.showInfoWindow">
-              <strong data-bind="text: name"></strong>
-            </li> 
-          </ul>
-          <!-- <script type="text/html" id="restaurant"> -->
-
-          <!-- </script> -->
-        </div>
-      </div>
   </div>
   </section>
   <div class="footer">
-    <p>♥ from Poland</p>
+    <p align="center">♥ from Poland, and yes, I love Sushi!</p>
   </div>
   </div>
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

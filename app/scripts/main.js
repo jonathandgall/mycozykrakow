@@ -119,7 +119,7 @@ var viewModel = {
     $.getJSON("https://api.foursquare.com/v2/venues/" + arg.f2venueid + "/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724", function(data) {
       var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + "x" + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
       var infowindow = new google.maps.InfoWindow({
-        content: '<img src=' + photoUrl + '>'
+        content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
       })
       infowindow.open(map, arg.marker);;
     })
