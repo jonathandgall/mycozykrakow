@@ -24,9 +24,22 @@ var restaurantModel = {
     name: 'Edo Sushi Bar',
     lat: 50.0521837,
     lng: 19.9429686,
-    contentString: '<div class="infowindow-render">Good Sushi</div>'
+    contentString: '<div class="infowindow-render">Better Sushi</div>'
   }],
 }
+
+//factorizing bounce in its own set
+function bounceMarker(marker) {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+      marker.setAnimation(null)
+    }, 2000);
+  }
+}
+
 
 //implementing google maps
 var map;
@@ -38,36 +51,26 @@ function initMap() {
       lat: 50.06193,
       lng: 19.94
     },
-    zoom: 13,
-
+    zoom: 13
   });
 
   //implementing a loop in order to retrieve the markers from the model and show them in the view
   for (var i = 0; i < restaurantModel.currentArray.length; i++) {
     restaurantModel.currentArray[i].marker = new google.maps.Marker({
       map: map,
+      animation: null,
       position: {
         lat: restaurantModel.currentArray[i].lat,
         lng: restaurantModel.currentArray[i].lng
       },
       title: restaurantModel.currentArray[i].name,
     });
-    isolateMarker(restaurantModel.currentArray[i].marker);
+    waitClickMarker(restaurantModel.currentArray[i].marker);
 
 
     //putting marker event listener to trigger bounce
-    function isolateMarker(marker) {
-      marker.addListener('click', function() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(function() {
-            marker.setAnimation(null)
-          }, 2000);
-
-        }
-      })
+    function waitClickMarker(marker) {
+      marker.addListener('click', function(){bounceMarker(marker)})
     };
 
   };
@@ -101,10 +104,7 @@ var viewModel = {
     var infowindow = new google.maps.InfoWindow({
       content: arg.contentString
     });
-    arg.marker.setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout(function() {
-      arg.marker.setAnimation(null)
-    }, 2000)
+    bounceMarker(arg.marker)
 
     infowindow.open(map, arg.marker);
   }
