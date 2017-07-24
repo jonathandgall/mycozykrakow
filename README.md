@@ -8,6 +8,12 @@ My Cozy Krakow is my Udacity Frontend Nanodegree graduation project. Creating a 
 2. In terminal, cd under the directory where the application is located and type 'gulp serve'
 3. Launch your browser to the url localhost:9000
 
+## Manual
+
+- Filter one of the 5 predefined Sushi place using the 'Where to go?' search box
+- Click on an item of the list to show its location bouncing on the map. Additionaly an infoWindow will appear showing a shot from the place or its meals, sourced from Foursquare.
+- Click on a marker of the map to make it bounce
+
 ## Important files for code examination
 
 ```

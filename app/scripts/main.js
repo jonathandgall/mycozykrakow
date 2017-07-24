@@ -81,16 +81,15 @@ function initMap() {
   };
 }
 
-//retrieving data from foursquare
+//defining a marker array that i will use in order to delete the infowindows that i want to hide after a click
+var markersArray = [];
 
-// function getImageFoursquare(arg) {
-//   console.log(arg)
-//   $.getJSON("https://api.foursquare.com/v2/venues/" + arg + "/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724", function(data) {
-//     return data.response.photos.items[0].prefix + "/" + data.response.photos.items[0].width + "x" + data.response.photos.items[0].height + "/" + data.response.photos.items[0].suffix
-//   })
-// }
-
-
+function clearOverlays() {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray.length = 0;
+}
 
 var viewModel = {
   //exporting a copy of the current array so that it is shown as a list on my landing page
@@ -101,6 +100,7 @@ var viewModel = {
   search: function(arg) {
     //removing current restaurants at the beginning of the loop
     viewModel.restaurants.removeAll();
+
     //check if value of arg exist in our model and adding/removing the marker depending on its existence
     for (var i = 0; i < restaurantModel.currentArray.length; i++) {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
@@ -121,14 +121,14 @@ var viewModel = {
       var infowindow = new google.maps.InfoWindow({
         content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
       })
-      infowindow.open(map, arg.marker);;
+      //clear existing infowindows before showing the next one
+      clearOverlays();
+      infowindow.open(map, arg.marker);
+      markersArray.push(arg.marker);
     })
     //console.log(getImageFoursquare(arg.f2venueid))
     bounceMarker(arg.marker)
-
   }
-
-
 };
 
 //create event notification mechanism. when the query changes, the search is invoked.
