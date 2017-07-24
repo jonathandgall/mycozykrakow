@@ -97,12 +97,14 @@ var viewModel = {
   },
 
 
-
-
-  bounceMarker: function(arg) {
+  showInfoWindow: function(arg) {
     var infowindow = new google.maps.InfoWindow({
       content: arg.contentString
     });
+    arg.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+      arg.marker.setAnimation(null)
+    }, 2000)
 
     infowindow.open(map, arg.marker);
   }
