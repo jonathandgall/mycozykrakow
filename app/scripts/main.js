@@ -3,23 +3,28 @@ var restaurantModel = {
   currentArray: [{
     name: '77 Sushi',
     lat: 50.0581635,
-    lng: 19.9389086
+    lng: 19.9389086,
+    contentString: '<div class="infowindow-render">Good Sushi</div>'
   }, {
     name: 'Youmiko Sushi',
     lat: 50.0504222,
-    lng: 19.943054
+    lng: 19.943054,
+    contentString: '<div class="infowindow-render">Good Sushi</div>'
   }, {
     name: 'Zen Sushi',
     lat: 50.0621398,
-    lng: 19.9417126
+    lng: 19.9417126,
+    contentString: '<div class="infowindow-render">Good Sushi</div>'
   }, {
     name: 'Urara',
     lat: 50.0643265802915,
-    lng: 19.9408391802915
+    lng: 19.9408391802915,
+    contentString: '<div class="infowindow-render">Good Sushi</div>'
   }, {
     name: 'Edo Sushi Bar',
     lat: 50.0521837,
-    lng: 19.9429686
+    lng: 19.9429686,
+    contentString: '<div class="infowindow-render">Good Sushi</div>'
   }],
 }
 
@@ -71,14 +76,16 @@ var viewModel = {
       }
     }
   },
+
+
   bounceMarker: function(arg) {
-      var infowindow = new google.maps.InfoWindow({
-        content: 'contentString'
-      });
+    var infowindow = new google.maps.InfoWindow({
+      content: arg.contentString
+    });
 
-      infowindow.open(map, arg.marker);
+    infowindow.open(map, arg.marker);
 
-    console.log(arg.marker)
+    // console.log(arg.marker)
   }
 };
 
