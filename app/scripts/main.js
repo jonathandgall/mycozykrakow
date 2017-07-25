@@ -84,21 +84,22 @@ function initMap() {
 
 //showing infowindow with data from foursquare
 function showInfoWindow(restaurant) {
-  $.getJSON('https://api.foursquare.com/v2/venues/' + restaurant.f2venueid + '/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724', function(data) {
+  $.getJSON('https://arpi.foursquare.com/v2/venues/' + restaurant.f2venueid + '/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724')
     //creating url of the photo using the api documentation from foursquare
-    var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
-    var infowindow = new google.maps.InfoWindow({
-      content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
+    .done(function(data) {
+      var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
+      var infowindow = new google.maps.InfoWindow({
+        content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
+      })
+      //clear existing infowindows before showing the next one
+      clearInfoWindow();
+      infowindow.open(map, restaurant.marker);
+      //put infowindow created in an array for reference to delete it after
+      infowindowsArray.push(infowindow);
     })
-    //clear existing infowindows before showing the next one
-    clearInfoWindow();
-    infowindow.open(map, restaurant.marker);
-    //put infowindow created in an array for reference to delete it after
-    infowindowsArray.push(infowindow);
-  })
-  //bounceMarker(restaurant.marker)
-  console.log(restaurant)
-  console.log(restaurant.marker)
+    //implementing error handling
+    .fail(function() { console.log("Sorry, we couldn't load the  images from Foursquare :(") })
+
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
@@ -135,8 +136,10 @@ var viewModel = {
     }
   },
 
-  showInfoWindow: function(restaurant) { bounceMarker(restaurant.marker);
-    showInfoWindow(restaurant) }
+  showInfoWindow: function(restaurant) {
+    bounceMarker(restaurant.marker);
+    showInfoWindow(restaurant)
+  }
 };
 
 //create event notification mechanism. when the query changes, the search is invoked.
