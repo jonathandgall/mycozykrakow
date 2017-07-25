@@ -1,5 +1,5 @@
 //model for restaurants in krakow
-var restaurantModel = {
+const restaurantModel = {
   currentArray: [{
     name: '77 Sushi',
     lat: 50.0581635,
@@ -54,7 +54,7 @@ function initMap() {
   });
 
   //implementing a loop in order to retrieve the markers from the model and show them in the view
-  for (var i = 0; i < restaurantModel.currentArray.length; i++) {
+  for (let i = 0; i < restaurantModel.currentArray.length; i++) {
     restaurantModel.currentArray[i].marker = new google.maps.Marker({
       map: map,
       animation: null,
@@ -71,7 +71,7 @@ function initMap() {
       marker.addListener('click', function() {
         bounceMarker(marker);
         var correctRestaurant;
-        for (var i = 0; i < restaurantModel.currentArray.length; i++) {
+        for (let i = 0; i < restaurantModel.currentArray.length; i++) {
           if (restaurantModel.currentArray[i].marker == marker) {
             correctRestaurant = restaurantModel.currentArray[i]
           };
@@ -84,12 +84,12 @@ function initMap() {
 
 //showing infowindow with data from foursquare
 function showInfoWindow(restaurant) {
-  $.getJSON('https://arpi.foursquare.com/v2/venues/' + restaurant.f2venueid + '/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724')
+  $.getJSON('https://api.foursquare.com/v2/venues/' + restaurant.f2venueid + '/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724')
     //creating url of the photo using the api documentation from foursquare
     .done(function(data) {
       var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
       var infowindow = new google.maps.InfoWindow({
-        content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
+        content: '<p class="infowindow-render">A picture from inside</p><p><img src=' + photoUrl + 'alt="Pictures" width="100px"></p>'
       })
       //clear existing infowindows before showing the next one
       clearInfoWindow();
@@ -98,15 +98,18 @@ function showInfoWindow(restaurant) {
       infowindowsArray.push(infowindow);
     })
     //implementing error handling
-    .fail(function() { console.log("Sorry, we couldn't load the  images from Foursquare :(") })
-
+    .fail(function() {
+      $('#myModal').modal({
+        keyboard: true
+      });
+    })
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
 var infowindowsArray = [];
 
 function clearInfoWindow() {
-  for (var i = 0; i < infowindowsArray.length; i++) {
+  for (let i = 0; i < infowindowsArray.length; i++) {
     infowindowsArray[i].close();
   }
   infowindowsArray.length = 0;
@@ -124,7 +127,7 @@ var viewModel = {
     clearInfoWindow();
 
     //check if value of restaurant exist in our model and adding/removing the marker depending on its existence
-    for (var i = 0; i < restaurantModel.currentArray.length; i++) {
+    for (let i = 0; i < restaurantModel.currentArray.length; i++) {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(restaurant.toLowerCase()) >= 0) {
         viewModel.restaurants.push(restaurantModel.currentArray[i]);
         //putting back the marker when there is a match

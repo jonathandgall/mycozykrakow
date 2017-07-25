@@ -1,4 +1,4 @@
-<p align="center"><h3>My Cozy Krakow</h3></p>
+<div margin="auto"><p align="center"><h3>My Cozy Krakow</h3></p></div>
 
 My Cozy Krakow is my Udacity Frontend Nanodegree graduation project. Creating a full responsive web application from scratch, using the Google Maps and the Foursquare API.
 
@@ -18,19 +18,20 @@ My Cozy Krakow is my Udacity Frontend Nanodegree graduation project. Creating a 
 
 ```
 mycozykrakow/
-└── app/
-    ├── scripts
-    │   └── main.js
-    ├── styles
-    │   └── main.scss
-    └── index.html
+├── app/
+│   ├── scripts
+│   │   └── main.js
+│   ├── styles
+│   │   └── main.scss
+│   └── index.html
+└── dist/
 ```
 
 The initial environment was setup through Yeoman. Gulp is being used as an automation build system in this project.
 
 ## Live access
 
-In order to test the web performance of the application hosted, please follow this link: 
+The `dist` directory includes the files built for production. In order to test those and performance of the application hosted, please follow this link:
 
 -------------------------------------
 http://odajay.com/mycozykrakow/dist/
