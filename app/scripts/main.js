@@ -72,13 +72,39 @@ function initMap() {
     });
     waitClickMarker(restaurantModel.currentArray[i].marker);
 
-
     //putting marker event listener to trigger bounce
     function waitClickMarker(marker) {
-      marker.addListener('click', function() { bounceMarker(marker) })
+      marker.addListener('click', function() {
+        bounceMarker(marker);
+        var correctRestaurant;
+        for (var i = 0; i < restaurantModel.currentArray.length; i++) {
+          if (restaurantModel.currentArray[i].marker == marker) {
+            correctRestaurant = restaurantModel.currentArray[i]
+          };
+        }
+        showInfoWindow(correctRestaurant);
+      })
     };
-
   };
+}
+
+//showing infowindow with data from foursquare
+function showInfoWindow(restaurant) {
+  $.getJSON('https://api.foursquare.com/v2/venues/' + restaurant.f2venueid + '/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724', function(data) {
+    //creating url of the photo using the api documentation from foursquare
+    var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
+    var infowindow = new google.maps.InfoWindow({
+      content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
+    })
+    //clear existing infowindows before showing the next one
+    clearInfoWindow();
+    infowindow.open(map, restaurant.marker);
+    //put infowindow created in an array for reference to delete it after
+    infowindowsArray.push(infowindow);
+  })
+  //bounceMarker(restaurant.marker)
+  console.log(restaurant)
+  console.log(restaurant.marker)
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
@@ -86,7 +112,7 @@ var infowindowsArray = [];
 
 function clearInfoWindow() {
   for (var i = 0; i < infowindowsArray.length; i++) {
-     infowindowsArray[i].close() ;
+    infowindowsArray[i].close();
   }
   infowindowsArray.length = 0;
 }
@@ -97,14 +123,14 @@ var viewModel = {
 
   query: ko.observable(''),
 
-  search: function(arg) {
+  search: function(restaurant) {
     //removing current restaurants at the beginning of the loop
     viewModel.restaurants.removeAll();
     clearInfoWindow();
 
-    //check if value of arg exist in our model and adding/removing the marker depending on its existence
+    //check if value of restaurant exist in our model and adding/removing the marker depending on its existence
     for (var i = 0; i < restaurantModel.currentArray.length; i++) {
-      if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(arg.toLowerCase()) >= 0) {
+      if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(restaurant.toLowerCase()) >= 0) {
         viewModel.restaurants.push(restaurantModel.currentArray[i]);
         //putting back the marker when there is a match
         restaurantModel.currentArray[i].marker.setMap(map)
@@ -115,23 +141,10 @@ var viewModel = {
     }
   },
 
-  //showing infowindow with data from foursquare
-  showInfoWindow: function(arg) {
-    $.getJSON("https://api.foursquare.com/v2/venues/" + arg.f2venueid + "/photos?&client_id=1QPPXDQSLOXUV5FGAANQG31S21EGUNNXJDP3HIXVECXWVXZ3&client_secret=IA0FKPF1FZ3AS4L1QNDQEFHC15B45ZY5ZXPDMX51UJL550TL&&v=20170724", function(data) {
-      //creating url of the photo using the api documentation from foursquare
-      var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + "x" + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
-      var infowindow = new google.maps.InfoWindow({
-        content: '<p class="infowindow-render">A picture from inside</p> <p> <img src=' + photoUrl + ' alt="Pictures" width="100px"></p>'
-      })
-      //clear existing infowindows before showing the next one
-      clearInfoWindow();
-      infowindow.open(map, arg.marker);
-      //put infowindow created in an array for reference to delete it after
-      infowindowsArray.push(infowindow);
-    })
-    //console.log(getImageFoursquare(arg.f2venueid))
-    bounceMarker(arg.marker)
-  }
+  showInfoWindow: function(restaurant) { bounceMarker(restaurant.marker);
+    showInfoWindow(restaurant) }
+
+
 };
 
 //create event notification mechanism. when the query changes, the search is invoked.
