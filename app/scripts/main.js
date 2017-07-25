@@ -89,7 +89,7 @@ function showInfoWindow(restaurant) {
     .done(function(data) {
       var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
       var infowindow = new google.maps.InfoWindow({
-        content: '<p class="infowindow-render">A picture from inside</p><p><img src=' + photoUrl + 'alt="Pictures" width="100px"></p>'
+        content: '<p class="infowindow-render">A picture from inside</p><p><img src="' + photoUrl + '" alt="Pictures" width="100px"></p>'
       })
       //clear existing infowindows before showing the next one
       clearInfoWindow();
