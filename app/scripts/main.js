@@ -4,31 +4,26 @@ var restaurantModel = {
     name: '77 Sushi',
     lat: 50.0581635,
     lng: 19.9389086,
-    contentString: '<div class="infowindow-render">Good Sushi</div>',
     f2venueid: '4bd5e3797b1876b074908b86'
   }, {
     name: 'Youmiko Sushi',
     lat: 50.0504222,
     lng: 19.943054,
-    contentString: '<div class="infowindow-render">Good Sushi</div>',
     f2venueid: '56193c32498e5b08a853b2e6'
   }, {
     name: 'Zen Sushi',
     lat: 50.0621398,
     lng: 19.9417126,
-    contentString: '<div class="infowindow-render">Good Sushi</div>',
     f2venueid: '4b61bd41f964a520b31f2ae3'
   }, {
     name: 'Urara',
     lat: 50.0643265802915,
     lng: 19.9408391802915,
-    contentString: '<div class="infowindow-render">Good Sushi</div>',
     f2venueid: '57652bda498ecdeadd38c82e'
   }, {
     name: 'Edo Sushi Bar',
     lat: 50.0521837,
     lng: 19.9429686,
-    contentString: '<div class="infowindow-render">Better Sushi</div>',
     f2venueid: '4c2773e55c5ca5938cc247fe'
   }],
 }
@@ -44,7 +39,6 @@ function bounceMarker(marker) {
     }, 2000);
   }
 }
-
 
 //implementing google maps
 var map;
@@ -143,8 +137,6 @@ var viewModel = {
 
   showInfoWindow: function(restaurant) { bounceMarker(restaurant.marker);
     showInfoWindow(restaurant) }
-
-
 };
 
 //create event notification mechanism. when the query changes, the search is invoked.
