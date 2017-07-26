@@ -26,7 +26,7 @@ const restaurantModel = {
     lng: 19.9429686,
     f2venueid: '4c2773e55c5ca5938cc247fe'
   }],
-}
+};
 
 //factorizing bounce in its own set
 function bounceMarker(marker) {
@@ -35,7 +35,7 @@ function bounceMarker(marker) {
   } else {
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function() {
-      marker.setAnimation(null)
+      marker.setAnimation(null);
     }, 2000);
   }
 }
@@ -53,6 +53,25 @@ function initMap() {
     zoom: 13
   });
 
+
+
+
+  //putting marker event listener to trigger bounce
+  function waitClickMarker(marker) {
+    marker.addListener('click', callBounce);
+    //call the bounce for the correct marker
+    function callBounce() {
+      var correctRestaurant;
+      for (let i = 0; i < restaurantModel.currentArray.length; i++) {
+        if (restaurantModel.currentArray[i].marker == marker) {
+          correctRestaurant = restaurantModel.currentArray[i];
+        }
+      }
+      bounceMarker(marker);
+      showInfoWindow(correctRestaurant);
+    }
+  }
+
   //implementing a loop in order to retrieve the markers from the model and show them in the view
   for (let i = 0; i < restaurantModel.currentArray.length; i++) {
     restaurantModel.currentArray[i].marker = new google.maps.Marker({
@@ -65,21 +84,7 @@ function initMap() {
       title: restaurantModel.currentArray[i].name,
     });
     waitClickMarker(restaurantModel.currentArray[i].marker);
-
-    //putting marker event listener to trigger bounce
-    function waitClickMarker(marker) {
-      marker.addListener('click', function() {
-        bounceMarker(marker);
-        var correctRestaurant;
-        for (let i = 0; i < restaurantModel.currentArray.length; i++) {
-          if (restaurantModel.currentArray[i].marker == marker) {
-            correctRestaurant = restaurantModel.currentArray[i]
-          };
-        }
-        showInfoWindow(correctRestaurant);
-      })
-    };
-  };
+  }
 }
 
 //showing infowindow with data from foursquare
@@ -90,7 +95,7 @@ function showInfoWindow(restaurant) {
       var photoUrl = data.response.photos.items[0].prefix + data.response.photos.items[0].width + 'x' + data.response.photos.items[0].height + data.response.photos.items[0].suffix;
       var infowindow = new google.maps.InfoWindow({
         content: '<p class="infowindow-render">A picture from inside</p><p><img src="' + photoUrl + '" alt="Pictures" width="100px"></p>'
-      })
+      });
       //clear existing infowindows before showing the next one
       clearInfoWindow();
       infowindow.open(map, restaurant.marker);
@@ -102,7 +107,7 @@ function showInfoWindow(restaurant) {
       $('#myModal').modal({
         keyboard: true
       });
-    })
+    });
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
@@ -131,17 +136,17 @@ var viewModel = {
       if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(restaurant.toLowerCase()) >= 0) {
         viewModel.restaurants.push(restaurantModel.currentArray[i]);
         //putting back the marker when there is a match
-        restaurantModel.currentArray[i].marker.setMap(map)
+        restaurantModel.currentArray[i].marker.setMap(map);
       } else {
         //removing the marker when there is no match
-        restaurantModel.currentArray[i].marker.setMap(null)
+        restaurantModel.currentArray[i].marker.setMap(null);
       }
     }
   },
 
   showInfoWindow: function(restaurant) {
     bounceMarker(restaurant.marker);
-    showInfoWindow(restaurant)
+    showInfoWindow(restaurant);
   }
 };
 
