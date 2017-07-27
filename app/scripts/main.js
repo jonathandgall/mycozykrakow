@@ -10,17 +10,17 @@ $.getJSON("./scripts/restaurant.json", function(data) {
   .done(function() {
     init();
     $.getScript("https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCW39emCmlKM0E8h_gW5rQnQA-a0JdBTpc&callback=initMap")
-    //showing error when the map address is incorrect
+      //showing error when the map address is incorrect
       .fail(function() {
-        errorModel.errorMessage("the google map could not loaded"),
+        errorModel.errorMessage("the google map could not loaded");
           $('#myModal').modal({
             keyboard: true
           });
-      })
+      });
   })
   //showing error when the restaurant access is incorrect
   .fail(function() {
-    errorModel.errorMessage("the restaurants database"),
+    errorModel.errorMessage("the restaurants database");
       $('#myModal').modal({
         keyboard: true
       });
@@ -101,11 +101,11 @@ function showInfoWindow(restaurant) {
     })
     //implementing error handling
     .fail(function() {
-    errorModel.errorMessage("Foursquare"),
-      $('#myModal').modal({
-        keyboard: true
-      });
-  });
+      errorModel.errorMessage("Foursquare");
+        $('#myModal').modal({
+          keyboard: true
+        });
+    });
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
@@ -122,7 +122,7 @@ function clearInfoWindow() {
 
 var errorModel = {
   errorMessage: ko.observable()
-}
+};
 ko.applyBindings(errorModel, document.getElementById('myModal'));
 
 //creating init app so we can be sure the viewmodel is accessing the model
