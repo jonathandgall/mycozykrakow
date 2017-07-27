@@ -1,32 +1,30 @@
-//model for restaurants in krakow
-const restaurantModel = {
-  currentArray: [{
-    name: '77 Sushi',
-    lat: 50.0581635,
-    lng: 19.9389086,
-    f2venueid: '4bd5e3797b1876b074908b86'
-  }, {
-    name: 'Youmiko Sushi',
-    lat: 50.0504222,
-    lng: 19.943054,
-    f2venueid: '56193c32498e5b08a853b2e6'
-  }, {
-    name: 'Zen Sushi',
-    lat: 50.0621398,
-    lng: 19.9417126,
-    f2venueid: '4b61bd41f964a520b31f2ae3'
-  }, {
-    name: 'Urara',
-    lat: 50.0643265802915,
-    lng: 19.9408391802915,
-    f2venueid: '57652bda498ecdeadd38c82e'
-  }, {
-    name: 'Edo Sushi Bar',
-    lat: 50.0521837,
-    lng: 19.9429686,
-    f2venueid: '4c2773e55c5ca5938cc247fe'
-  }],
-};
+//creating model on the global scope so it's accessible
+var restaurantModel;
+
+//retrieve in async the model
+$.getJSON("./scripts/restaurant.json", function(data) {
+    restaurantModel = data;
+  })
+  //init the application now that i know the view model is ready
+  //inspired from this stackOverflow reply, to be sure to load correctly the map: https://stackoverflow.com/questions/28485293/how-to-handle-google-maps-api-with-out-internet-in-javascript/28487258
+  .done(function() {
+    init();
+    $.getScript("https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCW39emCmlKM0E8h_gW5rQnQA-a0JdBTpc&callback=initMap")
+    //showing error when the map address is incorrect
+      .fail(function() {
+        errorModel.errorMessage("the google map could not loaded"),
+          $('#myModal').modal({
+            keyboard: true
+          });
+      })
+  })
+  //showing error when the restaurant access is incorrect
+  .fail(function() {
+    errorModel.errorMessage("the restaurants database"),
+      $('#myModal').modal({
+        keyboard: true
+      });
+  });
 
 //factorizing bounce in its own set
 function bounceMarker(marker) {
@@ -41,6 +39,8 @@ function bounceMarker(marker) {
 }
 
 //implementing google maps
+
+
 var map;
 
 function initMap() {
@@ -52,9 +52,6 @@ function initMap() {
     },
     zoom: 13
   });
-
-
-
 
   //putting marker event listener to trigger bounce
   function waitClickMarker(marker) {
@@ -104,10 +101,11 @@ function showInfoWindow(restaurant) {
     })
     //implementing error handling
     .fail(function() {
+    errorModel.errorMessage("Foursquare"),
       $('#myModal').modal({
         keyboard: true
       });
-    });
+  });
 }
 
 //defining a infowindow array that i will use in order to delete the infowindows that i want to hide after a click
@@ -120,37 +118,47 @@ function clearInfoWindow() {
   infowindowsArray.length = 0;
 }
 
-var viewModel = {
-  //exporting a copy of the current array so that it is shown as a list on my landing page
-  restaurants: ko.observableArray(restaurantModel.currentArray.slice(0, restaurantModel.currentArray.length)),
 
-  query: ko.observable(''),
 
-  search: function(restaurant) {
-    //removing current restaurants at the beginning of the loop
-    viewModel.restaurants.removeAll();
-    clearInfoWindow();
+var errorModel = {
+  errorMessage: ko.observable()
+}
+ko.applyBindings(errorModel, document.getElementById('myModal'));
 
-    //check if value of restaurant exist in our model and adding/removing the marker depending on its existence
-    for (let i = 0; i < restaurantModel.currentArray.length; i++) {
-      if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(restaurant.toLowerCase()) >= 0) {
-        viewModel.restaurants.push(restaurantModel.currentArray[i]);
-        //putting back the marker when there is a match
-        restaurantModel.currentArray[i].marker.setMap(map);
-      } else {
-        //removing the marker when there is no match
-        restaurantModel.currentArray[i].marker.setMap(null);
+//creating init app so we can be sure the viewmodel is accessing the model
+function init() {
+  var viewModel = {
+    //exporting a copy of the current array so that it is shown as a list on my landing page
+    restaurants: ko.observableArray(restaurantModel.currentArray.slice(0, restaurantModel.currentArray.length)),
+
+    query: ko.observable(''),
+
+    search: function(restaurant) {
+      //removing current restaurants at the beginning of the loop
+      viewModel.restaurants.removeAll();
+      clearInfoWindow();
+
+      //check if value of restaurant exist in our model and adding/removing the marker depending on its existence
+      for (let i = 0; i < restaurantModel.currentArray.length; i++) {
+        if (restaurantModel.currentArray[i].name.toLowerCase().indexOf(restaurant.toLowerCase()) >= 0) {
+          viewModel.restaurants.push(restaurantModel.currentArray[i]);
+          //putting back the marker when there is a match
+          restaurantModel.currentArray[i].marker.setMap(map);
+        } else {
+          //removing the marker when there is no match
+          restaurantModel.currentArray[i].marker.setMap(null);
+        }
       }
+    },
+
+    showInfoWindow: function(restaurant) {
+      bounceMarker(restaurant.marker);
+      showInfoWindow(restaurant);
     }
-  },
+  };
 
-  showInfoWindow: function(restaurant) {
-    bounceMarker(restaurant.marker);
-    showInfoWindow(restaurant);
-  }
-};
+  //create event notification mechanism. when the query changes, the search is invoked.
+  viewModel.query.subscribe(viewModel.search);
 
-//create event notification mechanism. when the query changes, the search is invoked.
-viewModel.query.subscribe(viewModel.search);
-
-ko.applyBindings(viewModel);
+  ko.applyBindings(viewModel, document.getElementById('bindingScope'));
+}

@@ -38,7 +38,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h3 style="color: #000">Sorry, we couldn't load the  images from Foursquare :(</h3>
+            <h3 style="color: #000">Sorry, we couldn't load data from <span data-bind="text: errorMessage"></span> :(</h3>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div class="center_div">
+    <div class="center_div" id="bindingScope">
       <form>
         <div class="form-group row">
           <div class="col">
@@ -117,7 +117,6 @@
   <!-- build:js scripts/main.js -->
   <script src="scripts/main.js"></script>
   <!-- endbuild -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCW39emCmlKM0E8h_gW5rQnQA-a0JdBTpc&callback=initMap"></script>
 </body>
 
 </html>
