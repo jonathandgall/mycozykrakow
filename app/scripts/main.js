@@ -2,17 +2,17 @@
 var restaurantModel;
 
 //retrieve in async the model
-$.getJSON("./scripts/restaurant.json", function(data) {
+$.getJSON('./scripts/restaurant.json', function(data) {
     restaurantModel = data;
   })
   //init the application now that i know the view model is ready
   //inspired from this stackOverflow reply, to be sure to load correctly the map: https://stackoverflow.com/questions/28485293/how-to-handle-google-maps-api-with-out-internet-in-javascript/28487258
   .done(function() {
     init();
-    $.getScript("https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCW39emCmlKM0E8h_gW5rQnQA-a0JdBTpc&callback=initMap")
+    $.getScript('https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCW39emCmlKM0E8h_gW5rQnQA-a0JdBTpc&callback=initMap')
       //showing error when the map address is incorrect
       .fail(function() {
-        errorModel.errorMessage("the google map could not loaded");
+        errorModel.errorMessage('the google map could not loaded');
         $('#myModal').modal({
           keyboard: true
         });
@@ -20,7 +20,7 @@ $.getJSON("./scripts/restaurant.json", function(data) {
   })
   //showing error when the restaurant access is incorrect
   .fail(function() {
-    errorModel.errorMessage("the restaurants database");
+    errorModel.errorMessage('the restaurants database');
     $('#myModal').modal({
       keyboard: true
     });
@@ -101,7 +101,7 @@ function showInfoWindow(restaurant) {
     })
     //implementing error handling
     .fail(function() {
-      errorModel.errorMessage("Foursquare");
+      errorModel.errorMessage('Foursquare');
       $('#myModal').modal({
         keyboard: true
       });
