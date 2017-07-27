@@ -8,6 +8,11 @@
   padding: 0.2em 0;
 }
 
+
+
+
+
+
 /* Placeholder color */
 
 ::-webkit-input-placeholder {
@@ -37,6 +42,12 @@
   color: #fff !important;
 }
 
+
+
+
+
+/* Custom styling */
+
 .loaderror {
   color: #000;
 }
@@ -48,11 +59,6 @@
 
 .selected-restaurant {
   margin-top: 40px;
-}
-
-.inputForm {
-  color: #fff;
-  margin-bottom: 0px;
 }
 
 .card-text,
@@ -76,6 +82,7 @@
 
 
 
+
 /* Space out content a bit */
 
 body {
@@ -85,11 +92,6 @@ body {
   font-family: 'Lato', sans-serif;
   color: #fff;
 }
-
-
-
-
-
 
 
 
@@ -142,6 +144,7 @@ h6 {
 
 .form-control:focus {
   background-color: #FF726F;
+  color: #fff;
 }
 
 input,
@@ -161,6 +164,7 @@ textarea {
 
 
 
+
 /* Make the masthead heading the same height as the navigation */
 
 .header h3 {
@@ -168,6 +172,7 @@ textarea {
   margin-bottom: 0;
   line-height: 3rem;
 }
+
 
 
 
@@ -187,11 +192,13 @@ textarea {
 
 
 
+
 /* Material Icon */
 
 .materialicon {
   font-family: 'Material Icons'
 }
+
 
 
 
@@ -215,6 +222,7 @@ textarea {
 
 
 
+
 /* Main marketing message and sign up button */
 
 .jumbotron {
@@ -232,6 +240,7 @@ textarea {
 
 
 
+
 /* Supporting marketing content */
 
 .marketing {
@@ -241,6 +250,7 @@ textarea {
 .marketing p+h4 {
   margin-top: 1.5rem;
 }
+
 
 
 
