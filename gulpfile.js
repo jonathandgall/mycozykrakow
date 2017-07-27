@@ -37,6 +37,8 @@ gulp.task('scripts', () => {
     .pipe(reload({ stream: true }));
 });
 
+
+
 function lint(files) {
   return gulp.src(files)
     .pipe($.eslint({ fix: true }))

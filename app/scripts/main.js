@@ -2,7 +2,7 @@
 var restaurantModel;
 
 //retrieve in async the model
-$.getJSON('/scripts/restaurant.json', function(data) {
+$.getJSON('restaurant.json', function(data) {
     restaurantModel = data;
   })
   //init the application now that i know the view model is ready
