@@ -13,17 +13,17 @@ $.getJSON("./scripts/restaurant.json", function(data) {
       //showing error when the map address is incorrect
       .fail(function() {
         errorModel.errorMessage("the google map could not loaded");
-          $('#myModal').modal({
-            keyboard: true
-          });
+        $('#myModal').modal({
+          keyboard: true
+        });
       });
   })
   //showing error when the restaurant access is incorrect
   .fail(function() {
     errorModel.errorMessage("the restaurants database");
-      $('#myModal').modal({
-        keyboard: true
-      });
+    $('#myModal').modal({
+      keyboard: true
+    });
   });
 
 //factorizing bounce in its own set
@@ -102,9 +102,9 @@ function showInfoWindow(restaurant) {
     //implementing error handling
     .fail(function() {
       errorModel.errorMessage("Foursquare");
-        $('#myModal').modal({
-          keyboard: true
-        });
+      $('#myModal').modal({
+        keyboard: true
+      });
     });
 }
 

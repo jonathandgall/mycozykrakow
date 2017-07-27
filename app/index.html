@@ -38,7 +38,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h3 style="color: #000">Sorry, we couldn't load data from <span data-bind="text: errorMessage"></span> :(</h3>
+            <h3 class="loaderror">Sorry, we couldn't load data from <span data-bind="text: errorMessage"></span> :(</h3>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -46,26 +46,26 @@
         </div>
       </div>
     </div>
-    <div class="header">
+    <header class="header">
       <div class="row">
-        <div class="col" style="color: #fff; vertical-align: baseline;">
+        <div class="col">
           <h4>Jonathan Gall x Udacity</h4></div>
-        <div class="col" style="text-align: center; letter-spacing: -0.88px;">
+        <div class="col text-center">
           <h4>My Cozy Krakow</h4></div>
-        <div class="col" style="text-align: right; vertical-align: top;
+        <div class="col text-right";
 ">
-          <a style="color: #fff; vertical-align: baseline;" href="http://www.twitter.com/odajay">
+          <a class="icon" href="http://www.twitter.com/odajay">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
         </div>
       </div>
-    </div>
-    <div class="center_div" id="bindingScope">
+    </header>
+    <main class="center_div" id="bindingScope">
       <form>
         <div class="form-group row">
           <div class="col">
             <!-- Dynamic search box which update at each character-->
-            <input type="search" class="form-control" id="inputQuery" style="color: #fff; margin-bottom: 0px;" placeholder="Where to go?" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+            <input type="search" class="form-control" id="inputQuery" class="inputForm" placeholder="Where to go?" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
           </div>
         </div>
       </form>
@@ -82,11 +82,11 @@
           <!-- </script> -->
         </div>
       </div>
-    </div>
+    </main>
     <div class="row">
       <div id="map"></div>
     </div>
-    <section class="selected-restaurant" style="margin-top: 40px">
+    <section class="selected-restaurant">
     </section>
     <div class="footer">
       <p class="text-center">♥ from Poland, and yes, I love Sushi!</p>

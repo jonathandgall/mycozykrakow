@@ -2,56 +2,93 @@
 @import "bower_components/bootstrap/scss/bootstrap.scss";
 // endbower
 .browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
-
 
 /* Placeholder color */
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #fff !important;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #fff !important;
-   opacity: 1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #fff !important;
-   opacity: 1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #fff !important;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-   color: #fff !important;
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #fff !important;
 }
 
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #fff !important;
+  opacity: 1;
+}
 
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #fff !important;
+  opacity: 1;
+}
 
-.card-text, .card-title {
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff !important;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #fff !important;
+}
+
+.loaderror {
+  color: #000;
+}
+
+.icon {
+  color: #fff;
+  vertical-align: baseline;
+}
+
+.selected-restaurant {
+  margin-top: 40px;
+}
+
+.inputForm {
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+.card-text,
+.card-title {
   color: #4A4A4A;
 }
+
+
+
+
 
 /* Map */
 
 #map {
-    min-height: 300px;
-    width: 100%;
+  min-height: 300px;
+  width: 100%;
 }
+
+
+
+
 
 
 /* Space out content a bit */
 
 body {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    background-color: #FF726F;
-    font-family: 'Lato', sans-serif;
-    color: #fff;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background-color: #FF726F;
+  font-family: 'Lato', sans-serif;
+  color: #fff;
 }
+
+
+
+
 
 
 
@@ -61,22 +98,26 @@ body {
 .header,
 .marketing,
 .footer {
-    padding-right: 1rem;
-    padding-left: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .col-sm-4 {
-    padding-left: 0rem;
-    padding-right: 0rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
 }
+
+
+
+
 
 
 /* Custom page header */
 
 .header {
-    padding-bottom: 1rem;
-    padding-left: 0rem;
-    padding-right: 0rem;
+  padding-bottom: 1rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
 }
 
 h4,
@@ -84,18 +125,18 @@ h2,
 h3,
 h5,
 h6 {
-    font-family: 'Neuton', serif;
+  font-family: 'Neuton', serif;
 }
 
 .form-control {
   font-size: 2.25rem;
   font-family: 'Neuton', serif;
-    background-color: #FF726F;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 1);
-    border-top: hidden;
-    border-left: hidden;
-    border-right: hidden;
+  background-color: #FF726F;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-top: hidden;
+  border-left: hidden;
+  border-right: hidden;
 }
 
 
@@ -105,99 +146,127 @@ h6 {
 
 input,
 textarea {
-    background-color: #FF726F;
-    color: #FFF;
+  background-color: #FF726F;
+  color: #FFF;
 }
 
 
 .center_div {
-    margin: 0 auto;
-    width: 80%/* value of your choice which suits your alignment */
+  margin: 0 auto;
+  width: 80%/* value of your choice which suits your alignment */
 }
+
+
+
+
 
 
 /* Make the masthead heading the same height as the navigation */
 
 .header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 3rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 3rem;
 }
+
+
+
+
 
 
 /* Custom page footer */
 
 .footer {
-    padding-top: 1.5rem;
-    color: #777;
-    border-top: .05rem solid #e5e5e5;
+  padding-top: 1.5rem;
+  color: #777;
+  border-top: .05rem solid #e5e5e5;
 }
+
+
+
+
 
 
 /* Material Icon */
 
 .materialicon {
-    font-family: 'Material Icons'
+  font-family: 'Material Icons'
 }
+
+
+
+
 
 
 /* Customize container */
 
 @media (min-width: 48em) {
-    .container {
-        max-width: 46rem;
-    }
+  .container {
+    max-width: 46rem;
+  }
 }
 
-.container-narrow > hr {
-    margin: 2rem 0;
+.container-narrow>hr {
+  margin: 2rem 0;
 }
+
+
+
+
 
 
 /* Main marketing message and sign up button */
 
 .jumbotron {
-    text-align: center;
-    border-bottom: .05rem solid #e5e5e5;
+  text-align: center;
+  border-bottom: .05rem solid #e5e5e5;
 }
 
 .jumbotron .btn {
-    padding: .75rem 1.5rem;
-    font-size: 1.5rem;
+  padding: .75rem 1.5rem;
+  font-size: 1.5rem;
 }
+
+
+
+
 
 
 /* Supporting marketing content */
 
 .marketing {
-    margin: 3rem 0;
+  margin: 3rem 0;
 }
 
-.marketing p + h4 {
-    margin-top: 1.5rem;
+.marketing p+h4 {
+  margin-top: 1.5rem;
 }
+
+
+
+
 
 
 /* Responsive: Portrait tablets and up */
 
 @media screen and (min-width: 48em) {
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 2rem;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 2rem;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
 }
 
 .infowindow-render {
-    color: black;
+  color: black;
 }
