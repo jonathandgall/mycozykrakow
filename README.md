@@ -6,8 +6,8 @@ My Cozy Krakow is my Udacity Frontend Nanodegree graduation project. Creating a 
 
 1. Download or clone this repository `git clone https://github.com/odajay/mycozykrakow.git`
 2. Please run `npm i` && `bower i` to install required packages.
-2. In terminal, cd under the directory where the application is located and type 'gulp serve'
-3. Launch your browser to the url localhost:9000
+3. In terminal, cd under the directory where the application is located and type 'gulp serve'
+4. Launch your browser to the url localhost:9000
 
 ## Manual
 
